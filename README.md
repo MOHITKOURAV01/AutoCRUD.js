@@ -2,11 +2,11 @@
 
 AutoCRUD.js is a configuration-driven backend framework built with Node.js. It automates the creation of RESTful APIs by generating database models, controllers, and routes dynamically from a YAML configuration file.
 
-## Project Goal
+## Project Goal :
 
 The primary objective of AutoCRUD.js is to eliminate repetitive boilerplate code in backend development. By defining data structures in a centralized configuration file, developers can deploy production-ready CRUD operations without manual implementation of standard logic.
 
-## System Architecture
+## System Architecture :-
 
 ```mermaid
 graph TD
@@ -39,7 +39,7 @@ graph TD
     Parser --> CF
 ```
 
-## System Workflow
+## System Workflow :-
 
 ```mermaid
 sequenceDiagram
@@ -55,7 +55,7 @@ sequenceDiagram
     App-->>Dev: Endpoints Live: /api/v1/resource
 ```
 
-## Technology Stack
+## Technology Stack :
 
 | Component | Technology |
 |-----------|------------|
@@ -65,7 +65,7 @@ sequenceDiagram
 | Validation | Joi |
 | Config | YAML |
 
-## Getting Started
+## Getting Started :-
 
 1. Define your data models in the `config.yaml` file.
 2. Initialize the framework to parse the configuration.
@@ -75,5 +75,5 @@ For detailed architecture, system design, and the project roadmap, please refer 
 
 ## Developer
 
-**Mohit Kourav**
+**Mohit Kourav ❤️**
 
