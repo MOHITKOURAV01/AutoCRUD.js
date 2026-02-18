@@ -24,14 +24,35 @@
 ## Mermaid Diagram
 
 ```mermaid
-graph TD
-    Developer --> Configure
-    Developer --> Generate
-    Developer --> Test
-    Developer --> Logs
+graph LR
+    %% Actors Definition
+    Dev((Developer))
+    Admin((System Admin))
 
-    Admin --> Monitor
-    Admin --> Security
-    Admin --> Update
+    subgraph "AutoCRUD.js Framework Boundary"
+        %% Developer Use Cases
+        UC1(Configure YAML Schema)
+        UC2(Auto-Generate CRUD APIs)
+        UC3(Manage Models & Controllers)
+        UC4(Test REST Endpoints)
+        UC5(Analyze System Logs)
 
-    Configure --> Generate
+        %% Admin Use Cases
+        UC6(Monitor Framework Health)
+        UC7(Configure Security Middleware)
+        UC8(Perform Framework Updates)
+
+        %% Relationships within System
+        UC1 -.->|triggers| UC2
+        UC2 -.->|includes| UC3
+    end
+
+    %% Actor Interactions
+    Dev --- UC1
+    Dev --- UC2
+    Dev --- UC4
+    Dev --- UC5
+
+    Admin --- UC6
+    Admin --- UC7
+    Admin --- UC8
