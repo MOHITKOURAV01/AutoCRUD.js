@@ -1,62 +1,79 @@
 # AutoCRUD.js
 
-AutoCRUD.js is a configuration-driven backend framework built using Node.js.  
-It automatically generates CRUD APIs using a YAML configuration file.
+AutoCRUD.js is a configuration-driven backend framework built with Node.js. It automates the creation of RESTful APIs by generating database models, controllers, and routes dynamically from a YAML configuration file.
 
----
+## Project Goal
 
-## Project Overview
+The primary objective of AutoCRUD.js is to eliminate repetitive boilerplate code in backend development. By defining data structures in a centralized configuration file, developers can deploy production-ready CRUD operations without manual implementation of standard logic.
 
-In backend development, writing CRUD APIs repeatedly is time-consuming and error-prone.  
-AutoCRUD.js reduces this effort by generating APIs, models, controllers, and routes automatically.
+## System Architecture
 
----
+```mermaid
+graph TD
+    subgraph Client_Side
+        User[API Client / Postman]
+    end
 
-## Problem Statement
+    subgraph Framework_Core
+        Parser[YAML Config Parser]
+        MF[Model Factory]
+        CF[Controller Factory]
+        Router[Dynamic Route Generator]
+    end
 
-Developers face issues like repetitive coding, slow development, poor maintainability, and lack of standard structure.
+    subgraph Middleware_Layer
+        Val[Joi Validation]
+        Sec[Security Middleware]
+    end
 
----
+    subgraph Database_Layer
+        DB[(MongoDB / Mongoose)]
+    end
 
-## Solution
+    User --> Router
+    Router --> Val
+    Val --> CF
+    CF --> MF
+    MF --> DB
+    Parser --> MF
+    Parser --> CF
+```
 
-Developers define database schemas in a YAML file.  
-The framework reads this file and generates complete REST APIs with validation and error handling.
+## System Workflow
 
----
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant Parser as Config Engine
+    participant App as Express App
+    participant DB as MongoDB
 
-## Key Features
-
-- YAML-based configuration  
-- Automatic CRUD generation  
-- MVC architecture  
-- Factory and Singleton patterns  
-- Validation and security middleware  
-- Pagination support  
-
----
+    Dev->>Parser: Define entity in config.yaml
+    Parser->>Parser: Parse & Validate Schema
+    Parser->>DB: Initialize Mongoose Models
+    Parser->>App: Inject Dynamic CRUD Routes
+    App-->>Dev: Endpoints Live: /api/v1/resource
+```
 
 ## Technology Stack
 
-- Node.js  
-- Express.js  
-- MongoDB  
-- Mongoose  
-- Joi  
-- YAML  
+| Component | Technology |
+|-----------|------------|
+| Runtime | Node.js |
+| Framework | Express.js |
+| Database | MongoDB & Mongoose |
+| Validation | Joi |
+| Config | YAML |
 
----
+## Getting Started
 
-## Future Enhancements
+1. Define your data models in the `config.yaml` file.
+2. Initialize the framework to parse the configuration.
+3. The server will dynamically register routes and models based on the definitions.
 
-- JWT Authentication  
-- CLI Tool  
-- Swagger Documentation  
-- Role-Based Access Control  
-
----
+For detailed architecture, system design, and the project roadmap, please refer to [idea.md](./idea.md).
 
 ## Developer
 
-Name: Mohit Kourav  
-Project: SESD Semester Project
+**Mohit Kourav**
+
