@@ -71,7 +71,7 @@ sequenceDiagram
 2. Initialize the framework to parse the configuration.
 3. The server will dynamically register routes and models based on the definitions.
 
-For detailed architecture, system design, and the project roadmap, please refer to [idea.md](./idea.md).
+For detailed architecture, system design, and the project roadmap, please refer to idea.md.
 
 ## Developer
 
