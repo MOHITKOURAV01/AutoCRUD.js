@@ -105,13 +105,58 @@ The working of AutoCRUD.js is divided into the following steps:
 11. Database stores or retrieves data.
 12. Response is sent back.
 
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant Parser as Config Engine
+    participant App as Express App
+    participant DB as MongoDB
+
+    Dev->>Parser: Define entity in config.yaml
+    Parser->>Parser: Parse & Validate Schema
+    Parser->>DB: Initialize Mongoose Models
+    Parser->>App: Inject Dynamic CRUD Routes
+    App-->>Dev: Endpoints Live: /api/v1/resource
+```
+
 This automated pipeline ensures consistency.
 
 ---
 
 ## System Architecture  
 
-AutoCRUD.js follows layered architecture:
+AutoCRUD.js follows a modular layered architecture:
+
+```mermaid
+graph TD
+    subgraph Client_Side
+        User[API Client / Postman]
+    end
+
+    subgraph Framework_Core
+        Parser[YAML Config Parser]
+        MF[Model Factory]
+        CF[Controller Factory]
+        Router[Dynamic Route Generator]
+    end
+
+    subgraph Middleware_Layer
+        Val[Joi Validation]
+        Sec[Security Middleware]
+    end
+
+    subgraph Database_Layer
+        DB[(MongoDB / Mongoose)]
+    end
+
+    User --> Router
+    Router --> Val
+    Val --> CF
+    CF --> MF
+    MF --> DB
+    Parser --> MF
+    Parser --> CF
+```
 
 ### 1. Presentation Layer  
 Handles API requests and responses.
@@ -132,6 +177,41 @@ Handles database operations.
 Manages security and parsing.
 
 This separation improves scalability and maintainability.
+
+---
+
+## Demonstration (Sample Configuration)
+
+To demonstrate the power of AutoCRUD.js, here is an example of a `config.yaml` file:
+
+```yaml
+project:
+  name: "MyStoreAPI"
+  version: "1.0.0"
+  port: 5000
+
+entities:
+  - name: "Product"
+    fields:
+      title: { type: "string", required: true }
+      price: { type: "number", min: 0 }
+      category: { type: "string" }
+      inStock: { type: "boolean", default: true }
+    routes:
+      - method: "GET"
+        path: "/products"
+      - method: "POST"
+        path: "/products"
+      - method: "DELETE"
+        path: "/products/:id"
+
+  - name: "Customer"
+    fields:
+      name: { type: "string", required: true }
+      email: { type: "string", unique: true }
+```
+
+The framework parses this file and immediately makes the corresponding API endpoints live.
 
 ---
 
