@@ -4,13 +4,13 @@ AutoCRUD.js – A Configuration Driven and Automated Backend Framework for Rapid
 
 ---
 
-## Abstract  
+## Abstract :-
 
 AutoCRUD.js is a custom-built backend framework developed using Node.js that enables developers to generate complete CRUD (Create, Read, Update, Delete) APIs automatically through a configuration file. Instead of manually writing repetitive backend code, developers define database structures in YAML format, and the framework generates models, controllers, routes, validation logic, and database connections dynamically. The project aims to improve productivity, reduce human errors, and promote clean software architecture using modern software engineering practices.
 
 ---
 
-## Introduction  
+## Introduction :-
 
 In today’s software industry, web and mobile applications require strong backend systems to manage users, data, authentication, and business logic. Backend development is often time-consuming because developers must repeatedly write similar code for different projects. This includes creating database models, API routes, controllers, validation logic, and error handling mechanisms.
 
@@ -18,7 +18,7 @@ AutoCRUD.js is designed to simplify this process by automating backend generatio
 
 ---
 
-## Motivation  
+## Motivation :-
 
 The motivation behind developing AutoCRUD.js is based on the following observations:
 
@@ -32,7 +32,7 @@ This project aims to address these issues by providing an educational and practi
 
 ---
 
-## Problem Statement  
+## Problem Statement :-
 
 Backend developers face several major challenges:
 
@@ -58,7 +58,7 @@ These problems lead to slow development cycles and low productivity.
 
 ---
 
-## Existing Systems and Their Limitations  
+## Existing Systems and Their Limitations :-
 
 Several platforms provide backend services, but they have limitations:
 
@@ -72,7 +72,7 @@ Such systems hide internal mechanisms, which prevents students from understandin
 
 ---
 
-## Proposed Solution  
+## Proposed Solution :-
 
 AutoCRUD.js provides a unified and configurable solution. The system reads a YAML configuration file that contains database schema definitions. Based on this configuration, the framework automatically:
 
@@ -88,7 +88,7 @@ This allows developers to build production-ready backends without repetitive cod
 
 ---
 
-## System Workflow  
+## System Workflow :-
 
 The working of AutoCRUD.js is divided into the following steps:
 
@@ -123,7 +123,7 @@ This automated pipeline ensures consistency.
 
 ---
 
-## System Architecture  
+## System Architecture :-
 
 AutoCRUD.js follows a modular layered architecture:
 
@@ -180,7 +180,7 @@ This separation improves scalability and maintainability.
 
 ---
 
-## Demonstration (Sample Configuration)
+## Demonstration (Sample Configuration) :-
 
 To demonstrate the power of AutoCRUD.js, here is an example of a `config.yaml` file:
 
@@ -215,7 +215,7 @@ The framework parses this file and immediately makes the corresponding API endpo
 
 ---
 
-## Design Methodology  
+## Design Methodology :-
 
 The framework is developed using object-oriented and modular design principles.
 
@@ -234,7 +234,7 @@ These ensure flexibility and reusability.
 
 ---
 
-## Key Features  
+## Key Features :-
 
 ### Configuration Management  
 Allows developers to define application structure in YAML format.
@@ -268,7 +268,7 @@ Supports future plugins.
 
 ---
 
-## Technology Stack  
+## Technology Stack :-
 
 | Category | Technology |
 |----------|------------|
@@ -283,7 +283,7 @@ Supports future plugins.
 
 ---
 
-## Implementation Strategy  
+## Implementation Strategy :-
 
 The project is implemented in phases:
 
@@ -313,7 +313,7 @@ Performance tuning.
 
 ---
 
-## Use Cases  
+## Use Cases :-
 
 - Rapid API development
 - Startup MVP creation
@@ -324,7 +324,7 @@ Performance tuning.
 
 ---
 
-## Advantages  
+## Advantages :-
 
 - Reduces coding effort
 - Improves reliability
@@ -335,7 +335,7 @@ Performance tuning.
 
 ---
 
-## Limitations  
+## Limitations :-
 
 - Not suitable for highly customized logic initially
 - Limited frontend support
@@ -344,7 +344,7 @@ Performance tuning.
 
 ---
 
-## Future Enhancements  
+## Future Enhancements :-
 
 1. JWT Authentication
 2. CLI Tool
@@ -359,7 +359,7 @@ Performance tuning.
 
 ---
 
-## Evaluation Parameters  
+## Evaluation Parameters :-
 
 The project will be evaluated based on:
 
@@ -372,6 +372,6 @@ The project will be evaluated based on:
 
 ---
 
-## Conclusion  
+## Conclusion :-
 
 AutoCRUD.js provides an efficient and scalable solution for backend automation. By using configuration-driven development, the framework reduces repetitive coding and enforces standard architecture practices. This project serves as both a learning platform and a professional backend tool, making it suitable for academic and industrial applications.
