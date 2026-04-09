@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-gray-300;
+    background-image: var(--grid-pattern);
+    background-size: 40px 40px;
+    position: relative;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--scanlines);
+    background-size: 100% 2px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.15;
+  }
+}
+
+@layer components {
+  .terminal-card {
+    @apply bg-[#121212]/80 backdrop-blur-md border border-[#ffffff10] rounded-lg overflow-hidden;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+  }
+
+  .terminal-input {
+    @apply bg-[#0a0a0a] border border-[#ffffff20] text-terminal-green font-mono p-2 rounded focus:outline-none focus:border-terminal-green transition-all;
+  }
+
+  .terminal-button {
+    @apply px-4 py-2 rounded font-bold uppercase tracking-wider transition-all active:scale-95;
+  }
+
+  .terminal-button-primary {
+    @apply terminal-button bg-terminal-green text-[#0a0a0a] hover:bg-opacity-90 hover:shadow-[0_0_15px_#00ff88];
+  }
+
+  .terminal-button-secondary {
+    @apply terminal-button bg-terminal-cyan text-[#0a0a0a] hover:bg-opacity-90 hover:shadow-[0_0_15px_#00d4ff];
+  }
+
+  .glow-text {
+    @apply text-terminal-green;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  }
+}
+
+:root {
+  --grid-pattern: linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+  --scanlines: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-terminal-green/20 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-terminal-green/50;
+}
+
+/* Monaco Editor Overrides */
+.monaco-editor {
+  padding-top: 10px;
+}
