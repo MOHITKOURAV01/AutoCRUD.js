@@ -90,3 +90,31 @@ erDiagram
         int status_code
         datetime created_at
     }
+```
+
+---
+
+## Relationship Analysis (Plain English)
+
+### 1. Developer (User) to Project (1:N)
+A single developer can orchestrate multiple professional backend projects using the AutoCRUD.js engine. Each project is isolated and represents a unique configuration context.
+
+### 2. Project to Schema/Entity (1:N)
+Within a single project definition (YAML), the developer can define multiple entities (e.g., Products, Customers, Orders). The system treats each entity as an independent schema within the project's namespace.
+
+### 3. Schema/Entity to API (1:N)
+For every single entity defined in the YAML, the framework automatically "manufactures" five standard RESTful endpoints (GET all, POST create, GET search, PUT update, DELETE). This ensures that a single schema definition generates a comprehensive API surface.
+
+### 4. API to Logs (1:N)
+As client applications interact with the generated endpoints, the system tracks telemetry and error data. Each specific endpoint can generate thousands of individual log entries, which are used for health monitoring and auditing.
+
+---
+
+## Physical Mapping to MongoDB
+
+At runtime, the framework translates these conceptual relationships into physical MongoDB collections:
+
+- **Entity Collections**: Each entity defined in `config.yaml` becomes a dedicated collection (e.g., `products`, `customers`).
+- **Metadata Management**: While the current version focus is on dynamic data, metadata like schemas and project settings are kept immutable in the framework memory, derived directly from the localized YAML source.
+- **Log Collection**: System logs are streamed via the `Logger` utility and can be directed to a centralized `logs` collection for production monitoring.
+- **Join Logic**: Relationships between collections (like a Product ID stored in an Order) are handled via standard Mongoose `ObjectId` references, enabling cross-entity data integrity.

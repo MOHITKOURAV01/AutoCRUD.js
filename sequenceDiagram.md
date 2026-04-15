@@ -1,35 +1,79 @@
+# Sequence Diagram: AutoCRUD.js Framework Lifecycle
 
-# Sequence Diagram: API Generation Flow
+This document provides a technical breakdown of the temporal interactions within the framework, divided into the **Boot Phase** and the **Runtime Phase**.
 
-## Main Flow: Generate CRUD APIs...
+## 1. System Initialization (Factory Boot)
+This sequence shows how the framework "manufactures" the API surface upon application startup.
 
 ```mermaid
 sequenceDiagram
-    autonumber
-    participant Dev as Developer (YAML)
-    participant Parser as ConfigParser
+    participant OS as Process/Env
+    participant CP as ConfigParser
+    participant DB as DatabaseManager
     participant MF as ModelFactory
     participant CF as ControllerFactory
-    participant Router as RouteGenerator
-    participant DB as MongoDB (Persistence)
+    participant RG as RouteGenerator
+    participant APP as Express App
 
-    Note over Dev, DB: Phase 1: Configuration & Initialization
-    Dev->>Parser: Provide 'config.yaml' (Schemas/Rules)
-    Parser->>Parser: Validate YAML Syntax & Schema
+    OS->>CP: Start with CONFIG_PATH
+    CP->>CP: Load & Validate YAML
+    CP-->>OS: Immutable Config Object
     
-    Parser->>DB: Init Singleton Connection
-    DB-->>Parser: Connection Established
+    OS->>DB: getInstance().connect(URI)
+    DB-->>OS: MongoDB Connection Ready
+    
+    OS->>MF: generateAll(entities)
+    loop For each Entity
+        MF->>MF: Create Mongoose Schema
+        MF->>MF: Register Model in Map
+    end
+    
+    OS->>CF: createAll(models, entities)
+    loop For each Model
+        CF->>CF: Instantiate BaseController
+    end
+    
+    OS->>RG: generateRoutes(entities, controllers)
+    loop For each Entity
+        RG->>APP: Bind GET, POST, PUT, DELETE
+    end
+    
+    OS->>APP: app.listen(PORT)
+    Note over APP: Framework Online
+```
 
-    Note over Parser, CF: Phase 2: Dynamic Resource Generation
-    Parser->>MF: Send Entity Definitions
-    MF->>MF: Map YAML types to Mongoose Schemas
-    MF->>DB: Register Dynamic Models
+## 2. API Request Lifecycle (The Production Line)
+This sequence shows how a single REST request is processed after the framework is live.
 
-    Parser->>CF: Send Business Rules
-    CF->>CF: Instantiate BaseController Methods
-    CF->>CF: Attach Joi Validation Logic
+```mermaid
+sequenceDiagram
+    participant Client
+    participant APP as Express Gateway
+    participant VM as ValidationMiddleware
+    participant CTRL as BaseController
+    participant MDB as MongoDB Atlas
+    participant RF as ResponseFormatter
 
-    Note over CF, Router: Phase 3: Routing & Server Boot
-    CF->>Router: Inject Controllers & Middleware
-    Router->>Router: Map HTTP Methods (GET, POST, etc.)
-    Router-->>Dev: API Endpoints Ready (Server Live)
+    Client->>APP: GET /api/v1/products?limit=10
+    APP->>VM: validateId() [If ID present]
+    APP->>VM: generateJoiSchema() [If POST/PUT]
+    
+    alt If Validation Fails
+        VM-->>Client: 422 Unprocessable Entity
+    else If Validation Passes
+        VM->>CTRL: getAll(req, res)
+        CTRL->>CTRL: _buildQuery(queryParams)
+        CTRL->>MDB: find().limit().sort()
+        MDB-->>CTRL: Document Result Set
+        CTRL->>RF: success(data, message)
+        RF-->>Client: 200 OK (JSON Payload)
+    end
+```
+
+## Description of Interactions
+
+### 1. Boot Logic
+The framework utilizes the **Factory Pattern** extensively during boot. The `ConfigParser` acts as the single source of truth, feeding schema definitions into the `ModelFactory`, which then allows the `ControllerFactory` to prepare the business logic layer.
+
+### 2. Runtime Pipeline
+Every request passes through an automated validation gate (`ValidationMiddleware`) before reaching the `BaseController`. This ensures that the database never encounters malformed data, maintaining the integrity of the dynamically generated models.

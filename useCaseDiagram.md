@@ -1,58 +1,64 @@
 # Use Case Diagram: AutoCRUD.js Framework
 
+The following diagram illustrates the functional requirements of the AutoCRUD.js framework from the perspective of different stakeholders.
+
 ## Actors
-- Developer
-- System Admin
+- **Developer**: Architect of the system who defines schemas and monitors the framework.
+- **API Consumer**: Client applications or developers using the generated REST surface.
+- **System**: The AutoCRUD core engine that orchestrates the automation pipeline.
 
-## Use Cases
-
-### Developer
-- Configure YAML File
-- Generate APIs
-- Manage Models
-- Manage Controllers
-- Test APIs
-- View Logs
-
-### System Admin
-- Monitor System
-- Manage Security
-- Update Framework
-
----
-
-## Mermaid Diagram
+## Mermaid Use Case Diagram
 
 ```mermaid
 graph LR
-    %% Actors Definition
     Dev((Developer))
-    Admin((System Admin))
+    Consumer((API Consumer))
+    System{AutoCRUD Engine}
 
-    subgraph "AutoCRUD.js Framework Boundary"
-        %% Developer Use Cases
-        UC1(Configure YAML Schema)
-        UC2(Auto-Generate CRUD APIs)
-        UC3(Manage Models & Controllers)
-        UC4(Test REST Endpoints)
-        UC5(Analyze System Logs)
-
-        %% Admin Use Cases
-        UC6(Monitor Framework Health)
-        UC7(Configure Security Middleware)
-        UC8(Perform Framework Updates)
-
-        %% Relationships within System
-        UC1 -.->|triggers| UC2
-        UC2 -.->|includes| UC3
+    subgraph Administration_Context
+        UC1[Configure YAML Schema]
+        UC2[Monitor System Health]
+        UC3[View Live Logs]
+        UC4[Manage Deployment]
     end
 
-    %% Actor Interactions
-    Dev --- UC1
-    Dev --- UC2
-    Dev --- UC4
-    Dev --- UC5
+    subgraph Operation_Context
+        UC5[Generate Dynamic APIs]
+        UC6[Validate Request Data]
+        UC7[Test Endpoints]
+        UC8[Perform CRUD Actions]
+    end
 
-    Admin --- UC6
-    Admin --- UC7
-    Admin --- UC8
+    Dev --> UC1
+    Dev --> UC2
+    Dev --> UC3
+    Dev --> UC4
+
+    Consumer --> UC7
+    Consumer --> UC8
+
+    System --> UC5
+    System --> UC6
+
+    %% Relationships
+    UC5 -.-> |includes| UC1
+    UC2 -.-> |extends| UC3
+    UC8 -.-> |includes| UC6
+```
+
+## Description of Use Cases
+
+### 1. Configure YAML Schema
+The Developer provides a structural definition of entities. This is the primary trigger for the entire framework lifecycle.
+
+### 2. Generate Dynamic APIs
+The System consumes the YAML and "manufactures" Mongoose models, Express controllers, and RESTful routes without manual coding.
+
+### 3. Monitor System Health
+The Developer checks the `/health` and `/routes` discovery endpoints to ensure the factory is operating within normal parameters.
+
+### 4. Test Endpoints
+The API Consumer uses the interactive **Explorer** to simulate requests and verify the generated logic against real-world data.
+
+### 5. Validate Request Data
+The System automatically applies Joi validation rules derived from the YAML field definitions before allowing any data to reach the database.
