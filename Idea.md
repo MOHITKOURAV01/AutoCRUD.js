@@ -58,6 +58,16 @@ These problems lead to slow development cycles and low productivity.
 
 ---
 
+## Real-World Problem Solved :-
+
+AutoCRUD.js addresses the critical bottleneck in modern software engineering known as **"Boilerplate Fatigue."** In a typical enterprise environment, senior architects spend roughly 40% of their initial project phase setting up repetitive but necessary CRUD structures. 
+
+By utilizing AutoCRUD.js, this setup phase is reduced from days to minutes. This allows engineering teams to focus on **high-value business logic** (like recommendation engines or payment integrations) rather than low-value data plumbing. Furthermore, it eliminates **"Architecture Drift,"** where different team members implement CRUD logic in inconsistent ways, leading to long-term technical debt.
+
+---
+
+---
+
 ## Existing Systems and Their Limitations :-
 
 Several platforms provide backend services, but they have limitations:
@@ -85,6 +95,18 @@ AutoCRUD.js provides a unified and configurable solution. The system reads a YAM
 - Handles errors centrally
 
 This allows developers to build production-ready backends without repetitive coding.
+
+---
+
+## Sponsor Value Proposition :-
+
+For organizations and stakeholders, AutoCRUD.js represents a strategic asset with three core value drivers:
+
+1. **Reduced Time-to-Market (TTM)**: By automating the entire data access layer, MVPs (Minimum Viable Products) can be launched in a fraction of the time, allowing earlier market validation.
+2. **Operational Efficiency**: Standardized code generation reduces the surface area for bugs, lowering the long-term maintenance costs and reducing the need for extensive unit testing of basic CRUD operations.
+3. **Architectural Guardrails**: It enforces a professional, layered architecture across all projects. This makes it significantly easier for new developers to onboard and understand the codebase, as the "AutoCRUD standard" is maintained by the framework itself.
+
+---
 
 ---
 
@@ -129,33 +151,32 @@ AutoCRUD.js follows a modular layered architecture:
 
 ```mermaid
 graph TD
-    subgraph Client_Side
-        User[API Client / Postman]
+    subgraph Client_Tier
+        User[API Client / Frontend]
     end
 
-    subgraph Framework_Core
-        Parser[YAML Config Parser]
-        MF[Model Factory]
-        CF[Controller Factory]
-        Router[Dynamic Route Generator]
+    subgraph Orchestration_Tier
+        Config[YAML Schema] --> Parser[Config Engine]
+        Parser --> Registry[Internal Service Registry]
     end
 
-    subgraph Middleware_Layer
-        Val[Joi Validation]
-        Sec[Security Middleware]
+    subgraph Manufacturing_Tier
+        Registry --> MF[Model Factory]
+        Registry --> CF[Controller Factory]
+        Registry --> RG[Route Generator]
     end
 
-    subgraph Database_Layer
-        DB[(MongoDB / Mongoose)]
+    subgraph Runtime_Tier
+        RG --> Middleware[Validation + Auth Middleware]
+        Middleware --> BaseCtrl[CRUD Base Controller]
+        BaseCtrl --> Mongoose[Database Adapter]
     end
 
-    User --> Router
-    Router --> Val
-    Val --> CF
-    CF --> MF
-    MF --> DB
-    Parser --> MF
-    Parser --> CF
+    subgraph Persistence_Tier
+        Mongoose --> MongoDB[(MongoDB Atlas)]
+    end
+
+    User --> RG
 ```
 
 ### 1. Presentation Layer  
