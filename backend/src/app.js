@@ -38,10 +38,8 @@ async function main() {
     ].filter(Boolean);
 
     app.use(cors({
-      origin: allowedOrigins,
-      credentials: true
+      origin: '*'
     }));
-
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(Logger.requestLogger);
@@ -71,7 +69,7 @@ async function main() {
     app.get('/', (req, res) => {
       res.status(200).json({
         status: 'success',
-        message: 'AutoCRUD API is running! 🚀',
+        message: 'AutoCRUD API is running!',
         endpoints: ['/api/v1/products', '/api/v1/customers', '/api/v1/orders']
       });
     });
