@@ -16,6 +16,7 @@ import RouteGenerator from './core/RouteGenerator.js';
 import Logger from './middleware/Logger.js';
 import ErrorHandler from './middleware/ErrorHandler.js';
 import ResponseFormatter from './utils/ResponseFormatter.js';
+import { log } from 'console';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,13 +30,13 @@ async function main() {
   try {
     // 1. Initialise Utilities
     app.use(helmet());
-    
+
     // Dynamic CORS Configuration
     const allowedOrigins = [
       'http://localhost:5173',
       process.env.FRONTEND_URL
     ].filter(Boolean);
-    
+
     app.use(cors({
       origin: allowedOrigins,
       credentials: true
@@ -66,6 +67,14 @@ async function main() {
     const routeGenerator = new RouteGenerator(app);
     routeGenerator.generateRoutes(config.entities, controllersMap, new Map(Object.entries(models)));
 
+
+    app.get('/', (req, res) => {
+      res.status(200).json({
+        status: 'success',
+        message: 'AutoCRUD API is running! 🚀',
+        endpoints: ['/api/v1/products', '/api/v1/customers', '/api/v1/orders']
+      });
+    });
     // 5. Meta Endpoints
     app.get('/api/v1/health', (req, res) => {
       ResponseFormatter.success(res, {
