@@ -1,9 +1,7 @@
 # AutoCRUD.js
 
 ![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-green)
-![License MIT](https://img.shields.io/badge/license-MIT-blue)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange)
-![Made with Love](https://img.shields.io/badge/made%20with-heart-red)
 
 **The zero-boilerplate manufacturing plant for production-grade REST APIs.**
 
@@ -197,9 +195,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ---
 
-### License & Authors
-- **Lead Architect**: Mohit Kourav
-- **License**: MIT - See [LICENSE](LICENSE) for details.
+- **Author**: Mohit Kourav
 
 ---
 **Build Backends Faster. Define, Don't Code.**
