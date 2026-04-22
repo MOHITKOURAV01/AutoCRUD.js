@@ -10,21 +10,22 @@ AutoCRUD.js is a metadata-driven backend framework built with Node.js that consu
 ---
 
 ### Demo & Aesthetics
-![Demo GIF Placeholder](https://via.placeholder.com/800x400.png?text=AutoCRUD+Framework+In+Action)
-*Live terminal dashboard with real-time telemetry and API explorer.*
+![System Dashboard](assets/system_dashboard.png)
+*Real-time telemetry and active API pipelines dashboard.*
 
 ---
 
 ### Table of Contents
 1. [Features](#features)
-2. [Tech Stack](#tech-stack)
-3. [Quick Start](#quick-start)
-4. [Configuration Architect](#configuration-architect)
-5. [API Reference](#api-reference)
-6. [Architecture & Diagrams](#architecture--diagrams)
-7. [Design Patterns](#design-patterns)
-8. [Contributing](#contributing)
-9. [License & Authors](#license--authors)
+2. [Visual Tour](#visual-tour)
+3. [Tech Stack](#tech-stack)
+4. [Quick Start](#quick-start)
+5. [Configuration Architect](#configuration-architect)
+6. [API Reference](#api-reference)
+7. [Architecture & Diagrams](#architecture--diagrams)
+8. [Design Patterns](#design-patterns)
+9. [Contributing](#contributing)
+10. [License & Authors](#license--authors)
 
 ---
 
@@ -35,6 +36,34 @@ AutoCRUD.js is a metadata-driven backend framework built with Node.js that consu
 - **Live API Explorer**: Built-in interactive REST client for testing generated endpoints.
 - **OOP Core**: Built with strict adherence to SOLID principles and professional design patterns.
 - **Real-time Telemetry**: Integrated latency monitoring and status code tracking.
+
+---
+
+### Visual Tour
+
+#### 1. Command Center (Hero)
+![Hero Section](assets/hero_section.png)
+*The high-fidelity terminal landing page where the manufacturing process begins.*
+
+#### 2. Architecture & Flow
+![Architecture Flow](assets/architecture_flow.png)
+*Visualizing the 3-step lifecycle: Define YAML, Parse Logic, and Go Live.*
+
+#### 3. Schema Architect
+![Schema Architect](assets/schema_architect.png)
+*A built-in Monaco editor for defining entities with real-time hierarchy visualization.*
+
+#### 4. System Telemetry
+![System Dashboard](assets/system_dashboard.png)
+*Real-time monitoring of active pipelines, uptime, and connectivity status.*
+
+#### 5. Command Architect (API Explorer)
+![API Explorer](assets/api_explorer.png)
+*An interactive REST client to test your generated endpoints directly from the dashboard.*
+
+#### 6. Operational Guide
+![Operational Guide](assets/operational_guide.png)
+*In-app documentation and technical specifications for the entire platform.*
 
 ---
 
