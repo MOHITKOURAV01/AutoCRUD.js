@@ -147,12 +147,17 @@ sequenceDiagram
 #### 2. Class Architecture
 ```mermaid
 classDiagram
-    class DatabaseManager { <<Singleton>> }
-    class ModelFactory { <<Factory>> }
-    class ControllerFactory { <<Factory>> }
-    class BaseController { <<Abstract>> }
+    class DatabaseManager
+    <<Singleton>> DatabaseManager
+    class ModelFactory
+    <<Factory>> ModelFactory
+    class ControllerFactory
+    <<Factory>> ControllerFactory
+    class BaseController
+    <<Abstract>> BaseController
+
     RouteGenerator --> ControllerFactory : requests
-    ControllerFactory --|> BaseController : instantiates
+    ControllerFactory ..> BaseController : instantiates
 ```
 
 ---
