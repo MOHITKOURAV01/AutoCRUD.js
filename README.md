@@ -1,4 +1,4 @@
-# AutoCRUD.js
+# AutoCRUD.js ⚡️
 
 ![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-green)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange)
